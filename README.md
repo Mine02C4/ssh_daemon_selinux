@@ -15,7 +15,7 @@ I believe it works in other environments as well. I would like information on co
 Execute the following command as root
 
 ```sh
-dnf config-manager --add-repo https://raw.githubusercontent.com/Mine02C4/ssh_daemon_selinux/main/repo/flexnet_selinux.repo
+dnf config-manager --add-repo https://raw.githubusercontent.com/Mine02C4/ssh_daemon_selinux/main/repo/ssh_daemon_selinux.repo
 ```
 
 If you want to import GPG keys in advance, execute the following command. (Optional)

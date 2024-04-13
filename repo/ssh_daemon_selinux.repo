@@ -1,0 +1,6 @@
+[flexnet_selinux]
+name=SELinux policy module to run ssh as a daemon
+baseurl=https://mine02c4.github.io/ssh_daemon_selinux/
+gpgkey=https://raw.githubusercontent.com/Mine02C4/ssh_daemon_selinux/main/signature/public.gpg
+enabled=1
+gpgcheck=1

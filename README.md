@@ -29,7 +29,7 @@ rpm --import https://raw.githubusercontent.com/Mine02C4/ssh_daemon_selinux/main/
 Execute the following command as root
 
 ```sh
-dnf install flexnet_selinux
+dnf install ssh_daemon_selinux
 ```
 
 If you run the command for the first time without importing the GPG key, the fingerprint of the GPG key will be confirmed. Please check if it matches the following.

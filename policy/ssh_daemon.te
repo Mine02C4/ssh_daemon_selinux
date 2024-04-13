@@ -1,0 +1,24 @@
+policy_module(ssh_daemon, 1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+gen_require(`type init_t;')
+gen_require(`type ssh_t;')
+gen_require(`type ssh_exec_t;')
+role system_r types ssh_t;
+
+########################################
+#
+# Policy
+#
+
+domtrans_pattern(init_t, ssh_exec_t, ssh_t)
+can_exec(init_t, ssh_exec_t)
+corenet_tcp_bind_all_unreserved_ports(ssh_t)
+corenet_tcp_connect_all_unreserved_ports(ssh_t)
+corenet_tcp_bind_all_ephemeral_ports(ssh_t)
+corenet_tcp_connect_all_ephemeral_ports(ssh_t)
+

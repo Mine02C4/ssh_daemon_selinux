@@ -1,0 +1,33 @@
+name: Build RPM
+on:
+  push:
+    paths:
+      - 'policy/**'
+  workflow_dispatch:
+
+env:
+  POLICY_NAME: ssh_daemon
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux:9-minimal
+    steps:
+    - name: Install prerequirements
+      run: microdnf install -y selinux-policy-devel tar findutils rpm-build
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Build SELinux policy
+      working-directory: ./policy
+      run: make -f /usr/share/selinux/devel/Makefile ${POLICY_NAME}.pp
+    - name: Build RPM
+      working-directory: ./policy
+      run: |
+        pwd=$(pwd)
+        rpmbuild --define "_sourcedir ${pwd}" --define "_specdir ${pwd}" --define "_builddir ${pwd}" --define "_srcrpmdir ${pwd}" --define "_rpmdir ${pwd}" --define "_buildrootdir ${pwd}/.build" -ba ${POLICY_NAME}_selinux.spec
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Binary RPM
+        path: ./policy/noarch/*.rpm
